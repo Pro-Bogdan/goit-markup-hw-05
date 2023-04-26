@@ -3,11 +3,14 @@
   --background-color: #ffffff;
   --background-section-color: #2e2f42;
 
+  --thumb-bg-color: #4d5ae5;
+
   /* text color */
   --main-title-color: #2e2f42;
   --text-description-color: #434455;
   --footer-text-color: #f4f4fd;
   --nav-color: #2e2f42;
+  --overlay-text-color: #f4f4fd;
 
   /* logo color */
   --logo-main-color: #4d5ae5;
@@ -23,6 +26,15 @@
   --icon-company-hover: #404bbf;
 
   --icon-social: #f4f4fd;
+
+  --bt-modal-main: #e7e9fc;
+  --bt-modal-hover: #404bbf;
+  --icon-modal-main: #2e2f42;
+  --icon-modal-hover: #ffffff;
+
+  /* animation  */
+  --main-delay: 250ms;
+  --main-cubic-bezier: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* global styles */
@@ -139,13 +151,34 @@ body {
 }
 
 .menu-button {
+  position: relative;
   padding: 24px 0;
 
   font-weight: 500;
   font-size: 16px;
-  line-height: 1.5;
+  /* line-height: 1.5; притиснув after */
   letter-spacing: 0.02em;
   color: var(--nav-color);
+
+  transition: color var(--main-delay) var(--main-cubic-bezier);
+}
+
+.active.menu-button {
+  color: var(--linkhover-color);
+}
+
+.active.menu-button::after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  display: block;
+  content: '';
+  width: 100%;
+  height: 4px;
+
+  background-color: var(--button-hover-color);
+  border-radius: 2px;
 }
 
 .menu-item {
@@ -179,6 +212,8 @@ body {
   line-height: 1.5;
   letter-spacing: 0.02em;
   color: var(--text-description-color);
+
+  transition: color var(--main-delay) var(--main-cubic-bezier);
 }
 
 /* hover and focus */
@@ -246,6 +281,8 @@ body {
 
   background-color: var(--button-normal-color);
   border-radius: 50%;
+
+  transition: background-color var(--main-delay) var(--main-cubic-bezier);
 }
 
 .social-icon-link:hover,
@@ -318,6 +355,8 @@ body {
   background-color: var(--button-normal-color);
   border: none;
   cursor: pointer;
+
+  transition: background-color var(--main-delay) var(--main-cubic-bezier);
 }
 
 .button-hero:hover,
@@ -463,6 +502,8 @@ body {
 
   background-color: var(--button-normal-color);
   border-radius: 50%;
+
+  transition: background-color var(--main-delay) var(--main-cubic-bezier);
 }
 
 .team-icon-link:hover,
@@ -515,6 +556,9 @@ body {
   border: 1px solid var(--icon-company);
   border-radius: 4px;
   color: var(--icon-company);
+
+  transition: border-color var(--main-delay) var(--main-cubic-bezier),
+    color var(--main-delay) var(--main-cubic-bezier);
 }
 
 .customers-link:hover,
@@ -550,8 +594,6 @@ body {
 
 .button-item {
   padding: 12px 24px 12px 24px;
-  border: 1px solid #e7e9fc;
-  border-radius: 4px;
   align-items: center;
 
   font-family: 'Roboto', sans-serif;
@@ -562,6 +604,13 @@ body {
   color: var(--button-normal-color);
   background-color: var(--footer-text-color);
   cursor: pointer;
+  border: 1px solid #e7e9fc;
+  border-radius: 4px;
+
+  transition: background-color var(--main-delay) var(--main-cubic-bezier),
+    color var(--main-delay) var(--main-cubic-bezier),
+    border var(--main-delay) var(--main-cubic-bezier),
+    box-shadow var(--main-delay) var(--main-cubic-bezier);
 }
 
 .button-item:hover,
@@ -596,6 +645,8 @@ body {
 
 .project-item-link {
   display: block;
+
+  transition: box-shadow var(--main-delay) var(--main-cubic-bezier);
 }
 
 .project-item-link:hover,
@@ -613,4 +664,109 @@ body {
 
 .project-item .title-name {
   margin-bottom: 8px;
+}
+
+/* Project overlay  */
+
+.project-item-thumb {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-overlay-text {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: var(--overlay-text-color);
+}
+
+.project-item-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  padding: 40px 32px 164px;
+  width: 100%;
+  height: 100%;
+
+  background-color: var(--thumb-bg-color);
+
+  transform: translateY(100%);
+  transition: transform var(--main-delay) var(--main-cubic-bezier);
+}
+
+.project-item:hover .project-item-overlay {
+  transform: translateY(0);
+}
+
+/*----------- Backdrop and modal----------  */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(46, 47, 66, 0.4);
+
+  transition: opacity var(--main-delay) var(--main-cubic-bezier);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 408px;
+  height: 584px;
+
+  background-color: #fcfcfc;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.button-modal-close {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--bt-modal-main);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+
+  transition: background-color var(--main-delay) var(--main-cubic-bezier);
+}
+
+.button-modal-close:hover,
+.button-modal-close:focus {
+  background-color: var(--bt-modal-hover);
+}
+
+.icon-modal-close {
+  fill: var(--icon-modal-main);
+
+  transition: fill var(--main-delay) var(--main-cubic-bezier);
+}
+
+.button-modal-close:hover .icon-modal-close,
+.button-modal-close:focus .icon-modal-close {
+  fill: var(--icon-modal-hover);
 }
