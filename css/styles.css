@@ -16,17 +16,16 @@
   --logo-main-color: #4d5ae5;
   --logo-header-color: #2e2f42;
 
-  /* link and button color */
-  --linkhover-color: #404bbf;
+  /* link, icon and button color */
+  --main-color-hover: #404bbf;
   --button-normal-color: #4d5ae5;
-  --button-hover-color: #404bbf;
+
   --icon-color: #404bbf;
   --icon-color-hover: #31d0aa;
   --icon-company: #8e8f99;
-  --icon-company-hover: #404bbf;
-
   --icon-social: #f4f4fd;
 
+  /* modal window */
   --bt-modal-main: #e7e9fc;
   --bt-modal-hover: #404bbf;
   --icon-modal-main: #2e2f42;
@@ -52,7 +51,7 @@ ul {
 
 body {
   font-family: 'Roboto', sans-serif;
-  color: #434455;
+  color: var(--text-description-color);
   background-color: var(--background-color);
 }
 
@@ -164,7 +163,7 @@ body {
 }
 
 .active.menu-button {
-  color: var(--linkhover-color);
+  color: var(--main-color-hover);
 }
 
 .active.menu-button::after {
@@ -177,7 +176,7 @@ body {
   width: 100%;
   height: 4px;
 
-  background-color: var(--button-hover-color);
+  background-color: var(--main-color-hover);
   border-radius: 2px;
 }
 
@@ -221,7 +220,34 @@ body {
 .menu-button:focus,
 .address-item:hover,
 .address-item:focus {
-  color: var(--linkhover-color);
+  color: var(--main-color-hover);
+}
+
+/* social network icons */
+
+.social-list {
+  display: flex;
+  justify-content: center;
+}
+.social-item {
+  width: 40px;
+  height: 40px;
+}
+.social-icon-link {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--button-normal-color);
+  border-radius: 50%;
+
+  transition: background-color var(--main-delay) var(--main-cubic-bezier);
+}
+
+.social-icon {
+  fill: var(--icon-social);
 }
 
 /*------------footer styles------------------- */
@@ -263,42 +289,16 @@ body {
   color: var(--background-color);
 }
 
-.social-block-list {
-  display: flex;
+.footer-social-list {
   gap: 16px;
-  justify-content: center;
-}
-.social-block-item {
-  width: 40px;
-  height: 40px;
-}
-.social-icon-link {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-
-  background-color: var(--button-normal-color);
-  border-radius: 50%;
-
-  transition: background-color var(--main-delay) var(--main-cubic-bezier);
 }
 
-.social-icon-link:hover,
-.social-icon-link:focus {
+.footer-social-list .social-icon-link:hover,
+.footer-social-list .social-icon-link:focus {
   background-color: var(--icon-color-hover);
 }
 
-.social-icon {
-  fill: var(--icon-social);
-}
-
 /* -----------PAGE index-------------------- */
-
-.icon .icone-inside {
-  fill: red;
-}
 
 /* ----hero----- */
 .hero-section {
@@ -361,7 +361,7 @@ body {
 
 .button-hero:hover,
 .button-hero:focus {
-  background-color: var(--button-hover-color);
+  background-color: var(--main-color-hover);
 }
 
 /* <!-- advantages -->  */
@@ -482,37 +482,13 @@ body {
   margin-bottom: 8px;
 }
 
-.team-icon-box {
-  display: flex;
+.team-social-list {
   gap: 24px;
-  justify-content: center;
 }
 
-.team-icon-list {
-  width: 40px;
-  height: 40px;
-}
-
-.team-icon-link {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-
-  background-color: var(--button-normal-color);
-  border-radius: 50%;
-
-  transition: background-color var(--main-delay) var(--main-cubic-bezier);
-}
-
-.team-icon-link:hover,
-.team-icon-link:focus {
-  background-color: var(--button-hover-color);
-}
-
-.team-icon {
-  fill: var(--icon-social);
+.team-social-list .social-icon-link:hover,
+.team-social-list .social-icon-link:focus {
+  background-color: var(--main-color-hover);
 }
 
 /*-----------customers---------------- */
@@ -542,10 +518,6 @@ body {
   width: calc((100% - 120px) / 6);
 }
 
-/* .customers-item:nth-last-child(-n + 1) {
-  margin-right: 0;
-} */
-
 .customers-link {
   display: flex;
   width: 100%;
@@ -563,8 +535,8 @@ body {
 
 .customers-link:hover,
 .customers-link:focus {
-  border-color: var(--icon-company-hover);
-  color: var(--icon-company-hover);
+  border-color: var(--main-color-hover);
+  color: var(--main-color-hover);
 }
 
 .customer-icon {
@@ -615,7 +587,7 @@ body {
 
 .button-item:hover,
 .button-item:focus {
-  background-color: var(--button-hover-color);
+  background-color: var(--main-color-hover);
   color: #ffffff;
   border: 1px solid transparent;
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 2px 1px rgba(0, 0, 0, 0.08),
