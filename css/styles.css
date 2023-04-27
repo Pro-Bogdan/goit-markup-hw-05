@@ -525,17 +525,15 @@ body {
   align-items: center;
   justify-content: center;
 
-  border: 1px solid var(--icon-company);
+  border: 1px solid currentColor;
   border-radius: 4px;
   color: var(--icon-company);
 
-  transition: border-color var(--main-delay) var(--main-cubic-bezier),
-    color var(--main-delay) var(--main-cubic-bezier);
+  transition: color var(--main-delay) var(--main-cubic-bezier);
 }
 
 .customers-link:hover,
 .customers-link:focus {
-  border-color: var(--main-color-hover);
   color: var(--main-color-hover);
 }
 
@@ -669,7 +667,8 @@ body {
   transition: transform var(--main-delay) var(--main-cubic-bezier);
 }
 
-.project-item:hover .project-item-overlay {
+.project-item-link:hover .project-item-overlay,
+.project-item-link:focus .project-item-overlay {
   transform: translateY(0);
 }
 
@@ -684,7 +683,8 @@ body {
 
   background-color: rgba(46, 47, 66, 0.4);
 
-  transition: opacity var(--main-delay) var(--main-cubic-bezier);
+  transition: opacity var(--main-delay) var(--main-cubic-bezier),
+    visibility var(--main-delay) var(--main-cubic-bezier);
 }
 
 .backdrop.is-hidden {
